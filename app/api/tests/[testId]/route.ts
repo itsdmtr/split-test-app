@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { auth } from '@/auth';
 import { dbQueries } from '@/lib/db';
 
 export async function DELETE(
@@ -6,8 +7,13 @@ export async function DELETE(
   { params }: { params: Promise<{ testId: string }> }
 ) {
   try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { testId } = await params;
-    const deleted = await dbQueries.deleteTest(testId);
+    const deleted = await dbQueries.deleteTest(testId, session.user.id);
 
     if (!deleted) {
       return NextResponse.json({ error: 'Test not found' }, { status: 404 });

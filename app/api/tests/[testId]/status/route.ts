@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { auth } from '@/auth';
 import { supabase } from '@/lib/supabase';
 
 export async function PATCH(
@@ -6,6 +7,11 @@ export async function PATCH(
   { params }: { params: Promise<{ testId: string }> }
 ) {
   try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { testId } = await params;
     const body = await request.json();
     const { status } = body;
@@ -21,6 +27,7 @@ export async function PATCH(
       .from('split_tests')
       .update({ status })
       .eq('id', testId)
+      .eq('user_id', session.user.id)
       .select()
       .single();
 
