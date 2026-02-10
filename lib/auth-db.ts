@@ -1,14 +1,14 @@
 import { supabase } from './supabase';
 
 export const authDbQueries = {
-  // Create or update user
+  // Create or update user - returns the user ID from database
   upsertUser: async (userData: {
     id: string;
     email: string;
     name?: string | null;
     image?: string | null;
-  }) => {
-    // First, try to find existing user by email
+  }): Promise<{ id: string; email: string; name: string | null; image: string | null }> => {
+    // Check if user exists by email
     const { data: existingUser } = await supabase
       .from('users')
       .select('*')
@@ -16,21 +16,21 @@ export const authDbQueries = {
       .single();
 
     if (existingUser) {
-      // Update existing user
+      // User exists - update their info but keep their original ID
       const { data, error } = await supabase
         .from('users')
         .update({
           name: userData.name,
           image: userData.image,
         })
-        .eq('email', userData.email)
+        .eq('id', existingUser.id)
         .select()
         .single();
 
       if (error) throw error;
       return data;
     } else {
-      // Insert new user
+      // New user - insert with provided ID
       const { data, error } = await supabase
         .from('users')
         .insert({

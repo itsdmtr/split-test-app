@@ -35,15 +35,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Ensure user exists in database
+    // Ensure user exists in database and get their actual database ID
+    let dbUserId = session.user.id;
     if (session.user.email) {
       console.log('POST /api/tests - Upserting user:', session.user.id);
-      await authDbQueries.upsertUser({
+      const dbUser = await authDbQueries.upsertUser({
         id: session.user.id,
         email: session.user.email,
         name: session.user.name,
         image: session.user.image,
       });
+      dbUserId = dbUser.id; // Use the database user ID, not session ID
+      console.log('POST /api/tests - Database user ID:', dbUserId);
     }
 
     const body = await request.json();
@@ -56,8 +59,8 @@ export async function POST(request: NextRequest) {
     }
 
     const { name, variants } = validation.data;
-    console.log('POST /api/tests - Creating test:', { name, variantCount: variants.length, userId: session.user.id });
-    const test = await dbQueries.createTest(name, variants, session.user.id);
+    console.log('POST /api/tests - Creating test:', { name, variantCount: variants.length, userId: dbUserId });
+    const test = await dbQueries.createTest(name, variants, dbUserId);
     console.log('POST /api/tests - Test created:', test.id);
 
     return NextResponse.json(test, { status: 201 });
