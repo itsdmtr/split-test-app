@@ -47,6 +47,7 @@ export function TestForm({ onSuccess }: { onSuccess?: (testId: string) => void }
         setValue(`variants.${i}.url`, '');
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [variantCount, setValue]);
 
   const onSubmit = async (data: CreateTestInput) => {

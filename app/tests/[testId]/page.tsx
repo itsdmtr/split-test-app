@@ -73,7 +73,7 @@ export default function TestDetailPage({
   const getVariantPercentage = (variantIndex: number) => {
     if (!analytics || analytics.total_clicks === 0) return 0;
     const clicks = getVariantClicks(variantIndex);
-    return ((clicks / analytics.total_clicks) * 100).toFixed(1);
+    return parseFloat(((clicks / analytics.total_clicks) * 100).toFixed(1));
   };
 
   if (loading) {
@@ -175,7 +175,7 @@ export default function TestDetailPage({
           <div className="space-y-4">
             {test.variants.map((variant, index) => {
               const clicks = getVariantClicks(index);
-              const actualPercentage = parseFloat(getVariantPercentage(index));
+              const actualPercentage = getVariantPercentage(index);
               const targetPercentage = variant.weight;
 
               return (

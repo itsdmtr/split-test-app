@@ -119,7 +119,7 @@ export function TestsTable({ refreshTrigger }: { refreshTrigger?: number }) {
       <div className="text-center py-12">
         <p className="text-muted-foreground mb-4">No tests yet</p>
         <p className="text-sm text-muted-foreground">
-          Click "Create Test" to get started
+          Click &ldquo;Create Test&rdquo; to get started
         </p>
       </div>
     );

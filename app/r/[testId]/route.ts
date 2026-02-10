@@ -29,11 +29,15 @@ export async function GET(
     const targetUrl = test.variants[variantIndex].url;
 
     // Log analytics (fire and forget - don't wait for it)
-    supabase
-      .from('redirect_analytics')
-      .insert({ test_id: testId, variant_index: variantIndex })
-      .then(() => {})
-      .catch((err) => console.error('Analytics logging failed:', err));
+    void (async () => {
+      try {
+        await supabase
+          .from('redirect_analytics')
+          .insert({ test_id: testId, variant_index: variantIndex });
+      } catch (err) {
+        console.error('Analytics logging failed:', err);
+      }
+    })();
 
     const response = NextResponse.redirect(targetUrl, 307);
     response.cookies.set(cookieName, sessionId, {
