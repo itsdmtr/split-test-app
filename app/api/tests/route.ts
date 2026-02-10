@@ -9,13 +9,23 @@ export async function GET() {
     const session = await auth();
     console.log('GET /api/tests - Session:', JSON.stringify(session, null, 2));
 
-    if (!session?.user?.id) {
+    if (!session?.user?.id || !session?.user?.email) {
       console.error('GET /api/tests - No session or user ID');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    console.log('GET /api/tests - Fetching tests for user:', session.user.id);
-    const tests = await dbQueries.getAllTests(session.user.id);
+    // Get the actual database user ID by email
+    const dbUser = await authDbQueries.upsertUser({
+      id: session.user.id,
+      email: session.user.email,
+      name: session.user.name,
+      image: session.user.image,
+    });
+    const dbUserId = dbUser.id;
+    console.log('GET /api/tests - Database user ID:', dbUserId);
+
+    console.log('GET /api/tests - Fetching tests for user:', dbUserId);
+    const tests = await dbQueries.getAllTests(dbUserId);
     console.log('GET /api/tests - Tests fetched:', tests?.length || 0);
     return NextResponse.json(tests);
   } catch (error) {
