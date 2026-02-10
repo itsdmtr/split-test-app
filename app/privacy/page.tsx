@@ -21,7 +21,7 @@ export default function PrivacyPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">1. Introduction</h2>
             <p className="mb-4">
-              Welcome to Split ("we," "our," or "us"). We respect your privacy and are committed to protecting
+              Welcome to Split (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;). We respect your privacy and are committed to protecting
               your personal data. This privacy policy explains how we collect, use, and safeguard your
               information when you use our Service.
             </p>
@@ -102,7 +102,7 @@ export default function PrivacyPage() {
 
             <h3 className="text-xl font-semibold mb-3 mt-4">Google OAuth</h3>
             <p className="mb-4">
-              We use Google OAuth for authentication. Your use of Google services is subject to Google's
+              We use Google OAuth for authentication. Your use of Google services is subject to Google&apos;s
               Privacy Policy. We only access basic profile information necessary for account creation.
             </p>
 
@@ -141,7 +141,7 @@ export default function PrivacyPage() {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">9. Children's Privacy</h2>
+            <h2 className="text-2xl font-semibold mb-4">9. Children&apos;s Privacy</h2>
             <p className="mb-4">
               Our Service is not intended for users under 13 years of age. We do not knowingly collect
               personal information from children under 13. If you believe we have collected information from
@@ -161,7 +161,7 @@ export default function PrivacyPage() {
             <h2 className="text-2xl font-semibold mb-4">11. Changes to This Policy</h2>
             <p className="mb-4">
               We may update this privacy policy from time to time. We will notify you of significant changes
-              by posting the new policy on this page and updating the "Last updated" date. Continued use of
+              by posting the new policy on this page and updating the &ldquo;Last updated&rdquo; date. Continued use of
               the Service constitutes acceptance of the updated policy.
             </p>
           </section>

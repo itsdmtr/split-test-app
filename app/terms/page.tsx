@@ -21,7 +21,7 @@ export default function TermsPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">1. Acceptance of Terms</h2>
             <p className="mb-4">
-              By accessing and using Split ("the Service"), you accept and agree to be bound by the terms
+              By accessing and using Split (&ldquo;the Service&rdquo;), you accept and agree to be bound by the terms
               and provision of this agreement. If you do not agree to these Terms of Service, please do not
               use the Service.
             </p>
@@ -82,7 +82,7 @@ export default function TermsPage() {
             <h2 className="text-2xl font-semibold mb-4">6. Service Availability</h2>
             <p className="mb-4">
               We strive to provide reliable service but do not guarantee uninterrupted access. The Service is
-              provided "as is" without warranties of any kind. We reserve the right to modify, suspend, or
+              provided &ldquo;as is&rdquo; without warranties of any kind. We reserve the right to modify, suspend, or
               discontinue the Service at any time.
             </p>
           </section>
