@@ -36,12 +36,12 @@ export default function LoginPage() {
           </div>
           <CardTitle className="text-3xl font-bold">Split</CardTitle>
           <CardDescription className="text-base mt-2">
-            A/B testing platform with analytics
+            One link, multiple destinations
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="text-center text-sm text-muted-foreground mb-6">
-            Sign in to manage your split tests
+            Split traffic across multiple URLs with smart redirects
           </div>
           <Button
             onClick={handleGoogleSignIn}
@@ -69,7 +69,14 @@ export default function LoginPage() {
             Continue with Google
           </Button>
           <p className="text-xs text-center text-muted-foreground">
-            By signing in, you agree to our Terms of Service and Privacy Policy
+            By signing in, you agree to our{' '}
+            <a href="/terms" className="underline hover:text-foreground">
+              Terms of Service
+            </a>{' '}
+            and{' '}
+            <a href="/privacy" className="underline hover:text-foreground">
+              Privacy Policy
+            </a>
           </p>
         </CardContent>
       </Card>
