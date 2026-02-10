@@ -8,22 +8,43 @@ export const authDbQueries = {
     name?: string | null;
     image?: string | null;
   }) => {
-    const { data, error } = await supabase
+    // First, try to find existing user by email
+    const { data: existingUser } = await supabase
       .from('users')
-      .upsert(
-        {
+      .select('*')
+      .eq('email', userData.email)
+      .single();
+
+    if (existingUser) {
+      // Update existing user
+      const { data, error } = await supabase
+        .from('users')
+        .update({
+          name: userData.name,
+          image: userData.image,
+        })
+        .eq('email', userData.email)
+        .select()
+        .single();
+
+      if (error) throw error;
+      return data;
+    } else {
+      // Insert new user
+      const { data, error } = await supabase
+        .from('users')
+        .insert({
           id: userData.id,
           email: userData.email,
           name: userData.name,
           image: userData.image,
-        },
-        { onConflict: 'id' }
-      )
-      .select()
-      .single();
+        })
+        .select()
+        .single();
 
-    if (error) throw error;
-    return data;
+      if (error) throw error;
+      return data;
+    }
   },
 
   // Get user by ID
