@@ -7,8 +7,11 @@ import { Providers } from "@/components/providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Split Test Manager",
-  description: "A/B testing and traffic splitting made simple",
+  title: "Split - One link, multiple destinations",
+  description: "Split traffic across multiple URLs with smart redirects. Create A/B tests and track analytics in real-time.",
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
