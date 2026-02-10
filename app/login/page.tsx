@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const handleGoogleSignIn = () => {
@@ -70,13 +71,13 @@ export default function LoginPage() {
           </Button>
           <p className="text-xs text-center text-muted-foreground">
             By signing in, you agree to our{' '}
-            <a href="/terms" className="underline hover:text-foreground">
+            <Link href="/terms" className="underline hover:text-foreground">
               Terms of Service
-            </a>{' '}
+            </Link>{' '}
             and{' '}
-            <a href="/privacy" className="underline hover:text-foreground">
+            <Link href="/privacy" className="underline hover:text-foreground">
               Privacy Policy
-            </a>
+            </Link>
           </p>
         </CardContent>
       </Card>
